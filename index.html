@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Taktyka dla opornych</title>
+    <script type="text/javascript" src="script/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="script/google-spreadsheet.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="style/style.css" rel="stylesheet" />
+</head>
+
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">
+		<img src="img/prof.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+		Taktyka dla opornych</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="https://www.facebook.com/taktykadlaopornych">Facebook</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://twitter.com/taktykao">Twitter</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container  mt-4" id="content">
+	</div>
+
+	<script>
+		localStorage.clear();
+		var sample_url = "https://spreadsheets.google.com/pub?key=1azgu2CL1vDpnO-Np9x9iLg5kYMc63Ux2iCy8HKHz4e8&hl=en&output=html";
+		var url_parameter = document.location.search.split(/\?url=/)[1]
+		var url = url_parameter || sample_url;
+		var googleSpreadsheet = new GoogleSpreadsheet();
+		googleSpreadsheet.url(url);
+		googleSpreadsheet.load(function(result) {
+		var data = result["data"];
+				
+		var html = "<div class='row'>";
+		
+		for(var i = 7; i < data.length; i+=7){
+			var date = data[i];
+			var teamA = data[i+1];
+			var teamB = data[i+2];
+			var comp = data[i+3];
+			var coach = data[i+4];
+			var title = data[i+5];
+			var link = data[i+6];
+			html += "<div class='col-12 col-lg-6'><div class='card text-white bg-dark text-center mb-4'><div class='card-header'>"+title+"</div> <div class='card-body'><h5 class='card-title'>"+teamA+"</h5><p class='card-text'>Rywal: "+teamB+"</p><p class='card-text'>Trener: "+coach+"</p><p class='card-text'>Rozgrywki: "+comp+"</p><a href='"+link+"' class='btn btn-primary'>Czytaj</a></div><div class='card-footer text-muted'>"+date+"</div></div></div>";
+			
+			if(i%2 == 0){
+				html += "</div><div class='row'>";
+			}
+		}
+	
+		$("#content").html(html);
+		});
+	</script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

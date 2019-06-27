@@ -4,7 +4,7 @@ Updated versions can be found at https://github.com/mikeymckay/google-spreadshee
 GoogleUrl = (function() {
   function GoogleUrl(sourceIdentifier) {
     this.sourceIdentifier = sourceIdentifier;
-    if (this.sourceIdentifier.match(/https*:/)) {
+    if (this.sourceIdentifier.match(/http(s)*:/)) {
       this.url = this.sourceIdentifier;
       try {
         this.key = this.url.match(/key=(.*?)&/)[1];
@@ -14,8 +14,8 @@ GoogleUrl = (function() {
     } else {
       this.key = this.sourceIdentifier;
     }
-    this.jsonCellsUrl = "https://spreadsheets.google.com/feeds/cells/" + this.key + "/od6/public/basic?alt=json-in-script";
-    this.jsonListUrl = "https://spreadsheets.google.com/feeds/list/" + this.key + "/od6/public/basic?alt=json-in-script";
+    this.jsonCellsUrl = "//spreadsheets.google.com/feeds/cells/" + this.key + "/od6/public/basic?alt=json-in-script";
+    this.jsonListUrl = "//spreadsheets.google.com/feeds/list/" + this.key + "/od6/public/basic?alt=json-in-script";
     this.jsonUrl = this.jsonCellsUrl;
   }
   return GoogleUrl;

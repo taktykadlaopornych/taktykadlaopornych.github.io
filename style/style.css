@@ -1,8 +1,26 @@
 body {
-    color: #000000;
-    background-color: #79aec8;
+    background-image: url('../img/bg.png');
+	background-repeat: repeat;
+	font-family: 'Roboto', sans-serif;
 }
 
 #content {
 	margin-top: 70 px;
+}
+
+.card {
+	height: 390px;
+}
+
+.btm-parent {
+	position: relative;
+}
+
+.btm {
+	position: absolute;
+	bottom: 15px;
+	left: 0;
+    right: 0;
+	margin-left: auto;
+	margin-right: auto;
 }
